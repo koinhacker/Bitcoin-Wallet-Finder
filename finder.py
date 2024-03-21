@@ -77,17 +77,21 @@ def finder(r):
             respone_block = requests.get(urlblock)
             byte_string = respone_block.content
             source_code = html.fromstring(byte_string)
-            xpatch_txid = '/html/body/main/div/div[2]/div[1]/table/tbody/tr[4]/td[2]'
+            xpatch_txid = '/html/body/main/div/div[2]/div[1]/table/tbody/tr[3]/td[2]'
             treetxid = source_code.xpath(xpatch_txid)
             xVol = str(treetxid[0].text_content())
-            balance = str(xVol)
+            balance_str = str(xVol)
+            balance_value = int(balance_str.split()[0])
+            balance = int(balance_str.split()[0])
             ifbtc = '0 BTC'
         except Exception as e:
             balance = 0
+            print(e)
+            time.sleep(3)
             pass
 
 
-        print('Winner Wallet:',Fore.GREEN, str(w), Fore.YELLOW,'Total Scan:',Fore.WHITE, str(z), Fore.YELLOW, Fore.YELLOW, 'P2PKH:', Fore.WHITE, str(addr), Fore.YELLOW, 'Balance:', Fore.WHITE, str(balance), end='\r', flush=True)
+        print('Winner Wallet:',Fore.GREEN, str(w), Fore.YELLOW,'Total Scan:',Fore.WHITE, str(z), Fore.YELLOW, Fore.YELLOW, 'P2PKH:', Fore.WHITE, str(addr), Fore.YELLOW, 'Balance:', Fore.WHITE, str(balance_str), end='\r', flush=True)
         z += 1
         
         if int(balance) > 0:

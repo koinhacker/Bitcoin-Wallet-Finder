@@ -1,3 +1,6 @@
 hdwallet
 colorama
 lxml
+ndg-httpsclient
+pyopenssl
+pyasn1
